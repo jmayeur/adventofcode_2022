@@ -1,0 +1,14 @@
+const INPUT = require('../data');
+
+const getElfCalorieTotals = (input) => {
+    // Group The Elf Caloires
+    const elves = input.split('\n\n');
+
+    // Get Each Elf's total
+    return elves.map((cals) => {
+        return cals.split('\n').map(Number).reduce((acc, num) => acc + num, 0);
+    })
+};
+
+const elfCalorieTotals = getElfCalorieTotals(INPUT);
+console.log(elfCalorieTotals.sort().reverse()[0]);
