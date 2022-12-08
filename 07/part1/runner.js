@@ -53,7 +53,7 @@ const getFileSizes = (files) => {
     }, 0);
 };
 
-const getDirectorySizes = (dirs, map, path,) => {
+const getDirectorySizes = (dirs, map, path) => {
 
     let size = 0;
     dirs.forEach(dir => {
