@@ -1,9 +1,11 @@
 const INPUT = require('../data');
+const TOTAL_AVAIL = 70000000;
+const REQUIRED_SPACE = 30000000;
 
 const buildDirTree = (INPUT) => {
     const lines = INPUT.split('\n');
     let root;
-    const result = lines.reduce((acc, line) => {
+    lines.reduce((acc, line) => {
 
         if (line.indexOf('$ cd') !== -1) {
             const [_, __, param] = line.split(' ');
@@ -74,13 +76,11 @@ const getNearestOverTarget = (map, target) => {
     }, Number.MAX_VALUE);
 };
 
+const getMinBytesToDelete = (rootSize) => {
+    return Math.abs(TOTAL_AVAIL - REQUIRED_SPACE - rootSize);
+};
+
 const data = buildDirTree(INPUT);
-//console.log(data);
 const sizes = getDirectorySizes([data], {}, '');
-
-console.log(getNearestOverTarget(sizes.map, 208860));
-
-// Total 70000000
-// Used  40208860
-// Reqd  30000000
-// delt    208860
+const delta = getMinBytesToDelete(sizes.size);
+console.log(getNearestOverTarget(sizes.map, delta));

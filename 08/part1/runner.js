@@ -10,21 +10,26 @@ const countVisible = (grid) => {
         for (let col = 1; col < grid[row].length - 1; col++) {
             const self = grid[row][col];
             let ic, ir;
-            let leftHidden = false;
+            let leftHidden = false, rightHidden = false, topHidden = false, bottomHidden = false;
             for (ic = 0; ic < col; ic++) {
                 leftHidden = leftHidden || grid[row][ic] >= self;
             }
-            let rightHidden = false;
-            for (ic = col + 1; ic < grid[row].length; ic++) {
-                rightHidden = rightHidden || grid[row][ic] >= self;
-            }
-            let topHidden = false;
-            for (ir = 0; ir < row; ir++) {
-                topHidden = topHidden || grid[ir][col] >= self;
-            }
-            let bottomHidden = false;
-            for (ir = row + 1; ir < grid.length; ir++) {
-                bottomHidden = bottomHidden || grid[ir][col] >= self;
+
+            if (leftHidden) {
+                for (ic = col + 1; ic < grid[row].length; ic++) {
+                    rightHidden = rightHidden || grid[row][ic] >= self;
+                }
+
+                if (rightHidden) {
+                    for (ir = 0; ir < row; ir++) {
+                        topHidden = topHidden || grid[ir][col] >= self;
+                    }
+                    if (topHidden) {
+                        for (ir = row + 1; ir < grid.length; ir++) {
+                            bottomHidden = bottomHidden || grid[ir][col] >= self;
+                        }
+                    }
+                }
             }
 
             if (!leftHidden || !rightHidden || !topHidden || !bottomHidden) {

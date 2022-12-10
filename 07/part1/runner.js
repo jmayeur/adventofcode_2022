@@ -76,7 +76,5 @@ const getSumOfSmallerThan100000 = (map) => {
 };
 
 const data = buildDirTree(INPUT);
-//console.log(data);
 const sizes = getDirectorySizes([data], {}, '');
-//console.log(sizes);
 console.log(getSumOfSmallerThan100000(sizes.map));
